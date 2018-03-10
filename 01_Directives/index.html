@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Practical task 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        .toolbar {
+            margin: 12px 0;
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+        .avatar > img,
+        .no-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 25%;
+        }
+
+        .no-avatar {
+            display: table-cell;
+            vertical-align: middle;
+            background-color: #ddd;
+            text-align: center;
+            line-height: 1;
+            color: #fff;
+            text-shadow: 0 1px 3px #000;
+            box-shadow: 1px 2px 0 #bbb;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="container" v-cloak>
+        <div class="row">
+            <div class="col-sm-12">
+                <hr>
+                <h2>{{ title }}</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>{{ lorem }}</p>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="toolbar clearfix">
+                    <h5 class="float-left">User list</h5>
+                    <button class="btn btn-info float-right" v-on:click="toggleUsersHandler">Toggle list</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="user-list-container" v-show="toggleUsers">
+                    <table class="table table-striped table-bordered rounded">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Avatar</th>
+                            <th>First name</th>
+                            <th>Middle name</th>
+                            <th>Last name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(user, index) in users" v-bind:key="user.id">
+                            <td>{{index + 1}}</td>
+                            <td>
+                                <div class="avatar" v-if="user.avatar_url">
+                                    <img v-bind:src="user.avatar_url" alt="">
+                                </div>
+                                <div class="no-avatar" v-else="user.avatar_url">No image</div>
+                            </td>
+                            <td>{{ user.fname }}</td>
+                            <td>{{ user.mname }}</td>
+                            <td>{{ user.lname }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <span class="float-right">Users list length - <strong v-text="users.length"></strong></span>
+                </div>
+                <div class="alert alert-info" v-show="!showUsers">
+                    User list is <strong>hidden</strong>! Click <strong>"Toggle list"</strong> button for show it.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.14/vue.min.js"></script>
+<script>
+    (function() {
+        new Vue({
+            el: "#app",
+            data: function() {
+                return {
+                    title: "Welcome to 1st practical task",
+                    lorem:
+                        "This is the simple text value from Vue application data property.",
+                    showUsers: true,
+                    users: [
+                        {
+                            id: "sd7asdv88asdv",
+                            avatar_url:
+                                "https://raw.githubusercontent.com/pixelastic/fakeusers/master/pictures/men/20.jpg",
+                            fname: "Sergey",
+                            mname: "Alekseevich",
+                            lname: "Yarchuk"
+                        },
+                        {
+                            id: "asdjsdf65687asdfasd",
+                            avatar_url:
+                                "https://raw.githubusercontent.com/pixelastic/fakeusers/master/pictures/women/10.jpg",
+                            fname: "It's",
+                            mname: "not my",
+                            lname: "avatar"
+                        },
+                        {
+                            id: "ghjkfd674ds53fgk57s",
+                            fname: "User",
+                            mname: "without",
+                            lname: "avatar"
+                        },
+                        {
+                            id: "cvbn587z64cvned",
+                            avatar_url:
+                                "https://raw.githubusercontent.com/pixelastic/fakeusers/master/pictures/men/7.jpg",
+                            fname: "Avatars",
+                            mname: "from",
+                            lname: "github.com"
+                        },
+                        {
+                            id: "qewrty787dfg5j5s8v8n",
+                            avatar_url: null,
+                            fname: "User",
+                            mname: "with NULL",
+                            lname: "avatar"
+                        }
+                    ]
+                };
+            },
+            computed: {
+                // this is overhead but only for the test computed property
+                toggleUsers: function() {
+                    return this.showUsers;
+                }
+            },
+            methods: {
+                toggleUsersHandler: function() {
+                    this.showUsers = !this.showUsers;
+                }
+            }
+        });
+    })();
+</script>
+</body>
+</html>
