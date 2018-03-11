@@ -33,8 +33,8 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
-jspm_packages/
+node_modules
+jspm_packages
 
 # Typescript v1 declaration files
 typings/
@@ -57,4 +57,17 @@ typings/
 # dotenv environment variables file
 .env
 
+.DS_Store
+/dist
+
+# local env files
+.env.local
+.env.*.local
+
+# Editor directories and files
 .idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
