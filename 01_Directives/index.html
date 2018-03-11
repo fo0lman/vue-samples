@@ -66,7 +66,7 @@
             <div class="col-sm-12">
                 <div class="toolbar clearfix">
                     <h5 class="float-left">User list</h5>
-                    <button class="btn btn-info float-right" v-on:click="toggleUsersHandler">Toggle list</button>
+                    <button type="button" class="btn btn-info float-right" v-on:click="toggleUserList">Toggle list</button>
                 </div>
 
             </div>
@@ -88,10 +88,10 @@
                         <tr v-for="(user, index) in users" v-bind:key="user.id">
                             <td>{{index + 1}}</td>
                             <td>
-                                <div class="avatar" v-if="user.avatar_url">
+                                <div v-if="user.avatar_url" class="avatar" >
                                     <img v-bind:src="user.avatar_url" alt="">
                                 </div>
-                                <div class="no-avatar" v-else="user.avatar_url">No image</div>
+                                <div v-else class="no-avatar">No image</div>
                             </td>
                             <td>{{ user.fname }}</td>
                             <td>{{ user.mname }}</td>
@@ -169,7 +169,7 @@
                 }
             },
             methods: {
-                toggleUsersHandler: function() {
+                toggleUserList: function() {
                     this.showUsers = !this.showUsers;
                 }
             }
