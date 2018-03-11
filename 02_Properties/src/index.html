@@ -14,18 +14,19 @@
             <div class="col-sm-12">
                 <div class="toolbar clearfix">
                     <h5 class="float-left">User list</h5>
-                    <button class="btn btn-info float-right" v-on:click="toggleUsersHandler">Toggle list</button>
+                    <button class="btn btn-info float-right" v-on:click="toggleUserList">Toggle list</button>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <div v-show="showUsers" class="user-list-container" >
-                    <user-list v-bind:users="users"></user-list>
-                </div>
-                <div class="alert alert-info" v-show="!showUsers">
+                <div v-if="!showUsers" class="alert alert-info">
                     User list is <strong>hidden</strong>! Click <strong>"Toggle list"</strong> button for show it.
                 </div>
+                <div v-else class="user-list-container" >
+                    <user-list v-bind:users="users"></user-list>
+                </div>
+
             </div>
         </div>
     </div>
@@ -50,10 +51,10 @@
             <tr v-for="(user, index) in users" v-bind:key="user.id">
                 <td>{{index + 1}}</td>
                 <td>
-                    <div class="avatar" v-if="user.picture">
+                    <div v-if="!user.picture" class="no-avatar">No image</div>
+                    <div v-else class="avatar">
                         <img v-bind:src="user.picture" alt="">
                     </div>
-                    <div class="no-avatar" v-else="user.picture">No image</div>
                 </td>
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.lastName }}</td>

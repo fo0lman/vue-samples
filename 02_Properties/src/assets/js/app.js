@@ -25,6 +25,9 @@
                 users: []
             };
         },
+        created: function() {
+            this.getUsers();
+        },
         methods: {
             getUsers: function() {
                 var self = this;
@@ -40,12 +43,9 @@
                         console.error(exception);
                     });
             },
-            toggleUsersHandler: function () {
+            toggleUserList: function () {
                 this.showUsers = !this.showUsers;
             }
-        },
-        created: function() {
-            this.getUsers();
         }
     });
 })();

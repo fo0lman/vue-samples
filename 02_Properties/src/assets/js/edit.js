@@ -16,13 +16,12 @@
         },
         data: function() {
             return {
-                user: {}
+                title: '',
+                user: null
             };
         },
-        computed: {
-            title: function() {
-                return this.user.firstName + ' ' + this.user.lastName;
-            },
+        created: function () {
+            this.getUser();
         },
         methods: {
             getUser: function() {
@@ -36,15 +35,13 @@
                         return users[5];
                     })
                     .then(function(user) {
+                        self.title = user.firstName + ' ' + user.lastName;
                         self.user = user;
                     })
                     .catch(function(exception) {
                         console.error(exception);
                     });
             }
-        },
-        created: function () {
-            this.getUser();
         }
     });
 })();
