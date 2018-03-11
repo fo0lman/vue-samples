@@ -114,10 +114,8 @@
     const component = {
         name: 'navbar',
         data() {
-            const toggled = JSON.parse(localStorage.getItem('menu-toggled'));
-
             return {
-                toggled,
+                toggled: '',
                 sideMenu: [
                     {
                         title: 'User List',
@@ -132,14 +130,23 @@
                 ]
             };
         },
+        created() {
+             this.toggled = this.getSidebarState();
+        },
         methods: {
             toggleSidebar() {
                 this.toggled = !this.toggled;
+            },
+            getSidebarState() {
+                return JSON.parse(localStorage.getItem('menu-toggled'));
+            },
+            setSidebarState() {
+                localStorage.setItem('menu-toggled', this.toggled);
             }
         },
         watch: {
             toggled() {
-                localStorage.setItem('menu-toggled', this.toggled);
+                this.setSidebarState();
             }
         }
     };

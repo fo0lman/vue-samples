@@ -16,10 +16,10 @@
         <tr v-for="(user, index) in users" v-bind:key="user.id">
             <td>{{index + 1}}</td>
             <td>
-                <div class="avatar" v-if="user.picture">
+                <div v-if="!user.picture" class="no-avatar">No image</div>
+                <div v-else class="avatar">
                     <img v-bind:src="user.picture" alt="">
                 </div>
-                <div class="no-avatar" v-else="user.picture">No image</div>
             </td>
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>
@@ -45,11 +45,6 @@
             users: {
                 type: Array,
                 required: true
-            }
-        },
-        computed: {
-            usersCount: function () {
-                return this.users.length;
             }
         }
     };

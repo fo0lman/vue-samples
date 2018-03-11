@@ -1,5 +1,5 @@
 <template>
-    <ol class="breadcrumb" v-if="routes.length">
+    <ol class="breadcrumb" v-if="routesLength">
         <li class="breadcrumb-item">
             <router-link to="/">Dashboard</router-link>
         </li>
@@ -21,12 +21,13 @@
 <script>
     const component = {
         name: 'breadcrumbs',
-        data() {
-            const routes = this.$route.matched;
-
-            return {
-                routes
-            };
+        computed: {
+            routesLength() {
+                return this.routes.length;
+            },
+            routes() {
+                return this.$route.matched;
+            }
         }
     };
 

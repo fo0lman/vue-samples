@@ -2,7 +2,10 @@
     <div>
         <NavBar></NavBar>
         <div class="content-wrapper">
-            <router-view></router-view>
+            <div class="container-fluid">
+                <DashboardBreadcrumbs></DashboardBreadcrumbs>
+                <router-view></router-view>
+            </div>
             <DashboardFooter></DashboardFooter>
             <ToTop></ToTop>
         </div>
@@ -11,6 +14,7 @@
 
 <script>
     import NavBar from '@/views/common/NavBar.vue';
+    import DashboardBreadcrumbs from '@/components/Breadcrumbs.vue';
     import DashboardFooter from '@/views/common/Footer.vue';
     import ToTop from '@/views/common/ToTop.vue';
 
@@ -18,6 +22,7 @@
         name: 'home',
         components: {
             NavBar,
+            DashboardBreadcrumbs,
             DashboardFooter,
             ToTop
         },
